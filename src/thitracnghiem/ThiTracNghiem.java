@@ -26,10 +26,11 @@ public class ThiTracNghiem extends javax.swing.JFrame {
      * Creates new form ThiTracNghiem
      */
     private int viTriHienTai;
-    private int soCauHoi=4;
+    private int soCauHoi=3;
     private ArrayList<CauHoi> list = new ArrayList<>();
     public void addCauHoiList(int n)
     {   
+        ArrayList<CauHoi> listTemp = new ArrayList<>();
         int i=0;
         try {
             Connection connect = MSSQLJDBCConnection.getJDBCConnection();
@@ -45,9 +46,16 @@ public class ThiTracNghiem extends javax.swing.JFrame {
                 String[] arrayCauTraLoi = cauTraLoi.split(",");
                 a.setCauTraLoi(arrayCauTraLoi);
                 a.setVitri(++i);
-                list.add(a);  
+                listTemp.add(a);  
                 if(i>n)
-                    return;
+                    break;
+            }
+            int arr[] =new int[soCauHoi];
+            XuLiRandom xuLiRandom =new XuLiRandom(soCauHoi);
+            xuLiRandom.xuLy(arr);
+            for(int k = 0;k<arr.length;k++)
+            {
+                list.add(listTemp.get(arr[k]));
             }
         } catch (SQLException ex) {
             Logger.getLogger(ThiTracNghiem.class.getName()).log(Level.SEVERE, null, ex);
@@ -311,7 +319,7 @@ public class ThiTracNghiem extends javax.swing.JFrame {
                     .addGroup(jPanelMainLayout.createSequentialGroup()
                         .addGap(59, 59, 59)
                         .addComponent(jButtonPre, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(293, 293, 293)
+                        .addGap(316, 316, 316)
                         .addComponent(jButtonFinish, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButtonNext, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
