@@ -5,13 +5,16 @@
  */
 package thitracnghiem;
 
+import java.awt.Color;
 import java.sql.*;
 import javax.swing.JButton;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JLabel;
+
 
 /**
  *
@@ -22,6 +25,8 @@ public class ThiTracNghiem extends javax.swing.JFrame {
     /**
      * Creates new form ThiTracNghiem
      */
+    private int viTriHienTai;
+    private int soCauHoi=4;
     private ArrayList<CauHoi> list = new ArrayList<>();
     public void addCauHoiList(int n)
     {   
@@ -50,25 +55,66 @@ public class ThiTracNghiem extends javax.swing.JFrame {
         
     }
    
-    public void addListFrame(CauHoi a)
+    public void addListFrame(CauHoi a)//THEM CAU HOI LEN UI
     {
+        jLabelSTT.setText(viTriHienTai+1+"");
         jLabelCauHoi.setText(a.getCauHoi());        
         jLabelCauTraLoiA.setText(a.getCauTraLoi()[0]);
         jLabelCauTraLoiB.setText(a.getCauTraLoi()[1]);
         jLabelCauTraLoiC.setText(a.getCauTraLoi()[2]);
-        jLabelCauTraLoiD.setText(a.getCauTraLoi()[3]);        
+        jLabelCauTraLoiD.setText(a.getCauTraLoi()[3]); 
+        if(a.getLuaChon()!="")
+        {
+            buttonGroupDapan.clearSelection();
+            
+            if(jLabelCauTraLoiA.getText().equalsIgnoreCase(a.getLuaChon()))
+            {
+                jRadioDapanA.setSelected(true);
+            }
+            else if(jLabelCauTraLoiB.getText().equalsIgnoreCase(a.getLuaChon()))
+            {
+                jRadioDapanB.setSelected(true);
+            }
+            else if(jLabelCauTraLoiC.getText().equalsIgnoreCase(a.getLuaChon()))
+            {
+                jRadioDapanC.setSelected(true);
+            }
+            else if(jLabelCauTraLoiD.getText().equalsIgnoreCase(a.getLuaChon()))
+            {
+                jRadioDapanD.setSelected(true);
+            }
+        }
+        else{
+            buttonGroupDapan.clearSelection();
+        }       
+    }
+    public void ResolveActionButton(CauHoi  cauHoi )
+    {
+        
+        addListFrame(cauHoi);
+//           System.out.println(cauHoi.getLuaChon());
     }
     public void addButtonIdDeThi(int n)
     {
         for(int i = 1; i <= n ; i++)
         {          
           String temp = i+"";
-          System.out.println(temp);
+//          System.out.println(temp);
           JButton a = new JButton(temp);
-          a.setName("jButton"+temp);
-          System.out.println(a.getName());          
-          a.setSize(60, 50);        
-          a.setVisible(true);
+                    
+          a.setSize(60, 50); 
+          int b =i-1;
+          a.addActionListener( new ActionListener() {
+              @Override
+              public void actionPerformed(ActionEvent e) {
+//                  System.out.println(temp);
+                    
+                    viTriHienTai = b;
+//                    System.out.println(viTriHienTai+"\t"+viTriTruoc);
+//                    System.out.println(list.get(b).getLuaChon());
+                    ResolveActionButton(list.get(b));
+              }
+          });
           jPanelCauHoi.add(a);
         }
         if(n<=50)
@@ -85,7 +131,7 @@ public class ThiTracNghiem extends javax.swing.JFrame {
     public ThiTracNghiem() {
         initComponents();
 //        jPanelTime.setVisible(false);
-        addButtonIdDeThi(40);
+        
         jLabelCauHoi.setText("");
         jLabelCauTraLoiA.setText("");
         jLabelCauTraLoiB.setText("");
@@ -110,7 +156,7 @@ public class ThiTracNghiem extends javax.swing.JFrame {
         jPanelCauHoi = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        jLabelSTT = new javax.swing.JLabel();
         jLabelIDCauHoi = new javax.swing.JLabel();
         jRadioDapanA = new javax.swing.JRadioButton();
         jRadioDapanB = new javax.swing.JRadioButton();
@@ -152,7 +198,7 @@ public class ThiTracNghiem extends javax.swing.JFrame {
 
         jLabel3.setText("Câu hỏi số");
 
-        jLabel4.setText("1");
+        jLabelSTT.setText("1");
 
         buttonGroupDapan.add(jRadioDapanA);
         jRadioDapanA.setText("A.");
@@ -197,8 +243,18 @@ public class ThiTracNghiem extends javax.swing.JFrame {
         jLabelCauTraLoiD.setText("jLabelCauTraLoid");
 
         jButtonPre.setText("<< PRE ");
+        jButtonPre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonPreActionPerformed(evt);
+            }
+        });
 
         jButtonNext.setText("NEXT>>");
+        jButtonNext.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonNextActionPerformed(evt);
+            }
+        });
 
         jButtonFinish.setText("START");
         jButtonFinish.addActionListener(new java.awt.event.ActionListener() {
@@ -248,7 +304,7 @@ public class ThiTracNghiem extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabelSTT, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabelCauHoi, javax.swing.GroupLayout.PREFERRED_SIZE, 1069, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addContainerGap(228, Short.MAX_VALUE))
@@ -280,7 +336,7 @@ public class ThiTracNghiem extends javax.swing.JFrame {
                         .addGap(100, 100, 100)
                         .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabelSTT, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabelCauHoi, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(55, 55, 55)
                         .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -303,7 +359,7 @@ public class ThiTracNghiem extends javax.swing.JFrame {
                             .addComponent(jButtonPre, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButtonFinish, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jButtonNext, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addContainerGap(400, Short.MAX_VALUE))
+                .addContainerGap(399, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -330,19 +386,32 @@ public class ThiTracNghiem extends javax.swing.JFrame {
 
     private void jRadioDapanAActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioDapanAActionPerformed
         // TODO add your handling code here:
-        
+        CauHoi a = list.get(viTriHienTai);
+        a.setLuaChon(jLabelCauTraLoiA.getText());
+        list.set(viTriHienTai, a);
     }//GEN-LAST:event_jRadioDapanAActionPerformed
 
     private void jRadioDapanBActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioDapanBActionPerformed
         // TODO add your handling code here:
+        CauHoi a = list.get(viTriHienTai);
+        a.setLuaChon(jLabelCauTraLoiB.getText());
+        list.set(viTriHienTai, a);
+
     }//GEN-LAST:event_jRadioDapanBActionPerformed
 
     private void jRadioDapanCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioDapanCActionPerformed
         // TODO add your handling code here:
+        CauHoi a = list.get(viTriHienTai);
+        a.setLuaChon(jLabelCauTraLoiC.getText());
+        list.set(viTriHienTai, a);
     }//GEN-LAST:event_jRadioDapanCActionPerformed
 
     private void jRadioDapanDActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioDapanDActionPerformed
         // TODO add your handling code here:
+        CauHoi a = list.get(viTriHienTai);
+        a.setLuaChon(jLabelCauTraLoiD.getText());
+        list.set(viTriHienTai, a);
+        
     }//GEN-LAST:event_jRadioDapanDActionPerformed
 
     private void jButtonFinishActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonFinishActionPerformed
@@ -354,16 +423,48 @@ public class ThiTracNghiem extends javax.swing.JFrame {
             buttonGroupDapan.clearSelection();
             addCauHoiList(4);
             addListFrame(list.get(0));
+            addButtonIdDeThi(soCauHoi);
             jPanelCauHoi.setVisible(true);
 //            jPanelTime.setVisible(true);
             jButtonFinish.setText("FINISH");
+            viTriHienTai = 0;
         }
         else{
 //             xử lí điểm.
+            int diem=0;
+            for(CauHoi cauHoi : list)
+            {
+                if(cauHoi.getDapAn().equalsIgnoreCase(cauHoi.getLuaChon())&&cauHoi.getLuaChon()!="")
+                {
+                    diem +=1;
+                }
+            }
+            String tk = (diem +"")+"/"+(soCauHoi+"");
+            KQ kq = new KQ(tk);
+            this.setVisible(false);
+            kq.setVisible(true);
             return;
         }
     }//GEN-LAST:event_jButtonFinishActionPerformed
 
+    private void jButtonPreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonPreActionPerformed
+        // TODO add your handling code here:
+        if(viTriHienTai!=0)
+        {
+             viTriHienTai-=1;
+             addListFrame(list.get(viTriHienTai));
+        }
+    }//GEN-LAST:event_jButtonPreActionPerformed
+
+    private void jButtonNextActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonNextActionPerformed
+        // TODO add your handling code here:
+        if(viTriHienTai!=soCauHoi-1)
+        {
+             viTriHienTai+=1;
+             addListFrame(list.get(viTriHienTai));
+        }
+    }//GEN-LAST:event_jButtonNextActionPerformed
+    
     /**
      * @param args the command line arguments
      */
@@ -407,13 +508,13 @@ public class ThiTracNghiem extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabelCauHoi;
     private javax.swing.JLabel jLabelCauTraLoiA;
     private javax.swing.JLabel jLabelCauTraLoiB;
     private javax.swing.JLabel jLabelCauTraLoiC;
     private javax.swing.JLabel jLabelCauTraLoiD;
     private javax.swing.JLabel jLabelIDCauHoi;
+    private javax.swing.JLabel jLabelSTT;
     private javax.swing.JPanel jPanelCauHoi;
     private javax.swing.JPanel jPanelMain;
     private javax.swing.JRadioButton jRadioDapanA;

@@ -109,7 +109,7 @@
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Component id="jLabel3" min="-2" pref="58" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="jLabel4" min="-2" pref="37" max="-2" attributes="0"/>
+                                  <Component id="jLabelSTT" min="-2" pref="37" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="jLabelCauHoi" min="-2" pref="1069" max="-2" attributes="0"/>
                               </Group>
@@ -151,7 +151,7 @@
                           <EmptySpace min="-2" pref="100" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="3" attributes="0">
                               <Component id="jLabel3" alignment="3" min="-2" pref="36" max="-2" attributes="0"/>
-                              <Component id="jLabel4" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
+                              <Component id="jLabelSTT" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
                               <Component id="jLabelCauHoi" alignment="3" min="-2" pref="32" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
@@ -182,7 +182,7 @@
                           </Group>
                       </Group>
                   </Group>
-                  <EmptySpace pref="400" max="32767" attributes="0"/>
+                  <EmptySpace pref="399" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -228,7 +228,7 @@
             <Property name="text" type="java.lang.String" value="C&#xe2;u h&#x1ecf;i s&#x1ed1;"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JLabel" name="jLabel4">
+        <Component class="javax.swing.JLabel" name="jLabelSTT">
           <Properties>
             <Property name="text" type="java.lang.String" value="1"/>
           </Properties>
@@ -308,11 +308,17 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="&lt;&lt; PRE "/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonPreActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jButtonNext">
           <Properties>
             <Property name="text" type="java.lang.String" value="NEXT&gt;&gt;"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButtonNextActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="jButtonFinish">
           <Properties>

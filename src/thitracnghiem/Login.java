@@ -152,6 +152,7 @@ public class Login extends javax.swing.JFrame {
         
         String username = jTextFieldUserName.getText();
         String password = String.valueOf(jPasswordField.getPassword());
+        System.out.println(username + password);
         if(KiemTraSinhVien(username, password))
         {
             ThiTracNghiem thiTracNghiem = new ThiTracNghiem();

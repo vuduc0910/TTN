@@ -30,11 +30,10 @@ public class ThreadTime extends Thread{
     }
     @Override
     public void run() {
-       Time time = new Time();
-       
+       Time time = new Time();       
        time.setVisible(true);
        String timer;
-       for(int i=0;i<20;i++)
+       for(int i=0;i<1800;i++)
        {
            try {
                Thread.sleep(1000);
@@ -43,6 +42,11 @@ public class ThreadTime extends Thread{
            }
           timer = checkTime(i/60) + ":" + checkTime(i%60);
           time.setTextTime(timer);
+          if(i==1763)
+          {
+              Notification notification = new Notification();
+              notification.setVisible(true);
+          }
        }
        System.exit(0);
     }
