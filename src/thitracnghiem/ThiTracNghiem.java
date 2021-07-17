@@ -15,6 +15,11 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.List;
+
 
 /**
  *
@@ -25,6 +30,7 @@ public class ThiTracNghiem extends javax.swing.JFrame {
     /**
      * Creates new form ThiTracNghiem
      */
+    private static final String COMMA_DELIMITER = ","; 
     private int viTriHienTai;
     private int soCauHoi=3;
     private ArrayList<CauHoi> list = new ArrayList<>();
@@ -32,18 +38,19 @@ public class ThiTracNghiem extends javax.swing.JFrame {
     {   
         ArrayList<CauHoi> listTemp = new ArrayList<>();
         int i=0;
+        BufferedReader br = null;
         try {
-            Connection connect = MSSQLJDBCConnection.getJDBCConnection();
-            Statement statement = connect.createStatement();
-            String sql = "SELECT * FROM dbo.CAUHOI";
-            ResultSet rs= statement.executeQuery(sql);
-            while(rs.next())
-            {
+            String line;
+            br = new BufferedReader(new FileReader("data/questions.csv"));
+ 
+            // How to read file in java line by line?
+            while ((line = br.readLine()) != null) {
+                List<String> questions = new ArrayList<String>();
+                questions = parseCsvLine(line);
                 CauHoi a = new CauHoi();
-                a.setCauHoi((String)rs.getNString("CAUHOI"));
-                a.setDapAn((String) rs.getNString("DAPAN"));
-                String cauTraLoi = (String)rs.getNString("CAUTRALOI");
-                String[] arrayCauTraLoi = cauTraLoi.split(",");
+                a.setCauHoi(questions.get(0));
+                a.setDapAn(questions.get(2));
+                String[] arrayCauTraLoi = questions.get(1).split("-");
                 a.setCauTraLoi(arrayCauTraLoi);
                 a.setVitri(++i);
                 listTemp.add(a);  
@@ -57,10 +64,17 @@ public class ThiTracNghiem extends javax.swing.JFrame {
             {
                 list.add(listTemp.get(arr[k]));
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(ThiTracNghiem.class.getName()).log(Level.SEVERE, null, ex);
+ 
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (br != null)
+                    br.close();
+            } catch (IOException crunchifyException) {
+                crunchifyException.printStackTrace();
+            }
         }
-        
     }
    
     public void addListFrame(CauHoi a)//THEM CAU HOI LEN UI
@@ -134,7 +148,16 @@ public class ThiTracNghiem extends javax.swing.JFrame {
             jPanelCauHoi.setLayout(new GridLayout(0,5));
         }
             
-        
+    }
+    public static List<String> parseCsvLine(String csvLine) {
+        List<String> result = new ArrayList<String>();
+        if (csvLine != null) {
+            String[] splitData = csvLine.split(COMMA_DELIMITER);
+            for (int i = 0; i < splitData.length; i++) {
+                result.add(splitData[i]);
+            }
+        }
+        return result;
     }
     public ThiTracNghiem() {
         initComponents();

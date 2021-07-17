@@ -9,60 +9,69 @@ package thitracnghiem;
  *
  * @author vuduc
  */
-import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-public class Login extends javax.swing.JFrame {
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
+
+
+public class Login extends javax.swing.JFrame {
+    private static final String COMMA_DELIMITER = ","; 
     /**
      * Creates new form Login
      */
     public boolean KiemTraSinhVien(String username, String password)
     {        
+        BufferedReader br = null;
         try {
-            Connection connect = MSSQLJDBCConnection.getJDBCConnection();
-            Statement statement = connect.createStatement();
-            String sql = "SELECT * FROM dbo.SINHVIEN";
-            ResultSet rs = statement.executeQuery(sql);
-            while(rs.next())
-            {
-                String user = (String)rs.getNString("MSSV");
-                String pwd = (String)rs.getNString("PWD");
-                if(user.equalsIgnoreCase(username) && pwd.equalsIgnoreCase(pwd))
-                {
+            String line;
+            br = new BufferedReader(new FileReader("data/students.csv"));
+ 
+            // How to read file in java line by line?
+            while ((line = br.readLine()) != null) {
+                List<String> account = new ArrayList<String>();
+                account = parseCsvLine(line);
+                System.out.println(account.get(0)+ username);
+                if(username.equals(account.get(0)) && password.equals(account.get(1))){
+                    System.out.println("2");
                     return true;
                 }
-             
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return false;
-    }
-    public boolean KiemTraGiaoVien(String username, String password)
-    {        
-        try {
-            Connection connect = MSSQLJDBCConnection.getJDBCConnection();
-            Statement statement = connect.createStatement();
-            String sql = "SELECT * FROM dbo.TEACHER";
-            ResultSet rs = statement.executeQuery(sql);
-            while(rs.next())
-            {
-                String user = (String)rs.getNString("MSGV");
-                String pwd = (String)rs.getNString("PWD");
-                if(user.equalsIgnoreCase(username) && pwd.equalsIgnoreCase(pwd))
-                {
-                    return true;
-                }
-             
+ 
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (br != null)
+                    br.close();
+            } catch (IOException crunchifyException) {
+                crunchifyException.printStackTrace();
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         }
         return false;
     }
     
+    public static List<String> parseCsvLine(String csvLine) {
+        List<String> result = new ArrayList<String>();
+        if (csvLine != null) {
+            String[] splitData = csvLine.split(COMMA_DELIMITER);
+            for (int i = 0; i < splitData.length; i++) {
+                result.add(splitData[i]);
+            }
+        }
+        return result;
+    }
+
+    public boolean KiemTraGiaoVien(String username, String password)
+    {        
+//        chưa update
+        return false;
+    }
     
     public Login() {
         initComponents();
