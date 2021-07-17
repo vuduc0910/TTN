@@ -38,7 +38,6 @@ public class Login extends javax.swing.JFrame {
                 account = parseCsvLine(line);
                 System.out.println(account.get(0)+ username);
                 if(username.equals(account.get(0)) && password.equals(account.get(1))){
-                    System.out.println("2");
                     return true;
                 }
             }
