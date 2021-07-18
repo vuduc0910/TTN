@@ -42,7 +42,7 @@ public class ThiTracNghiem extends javax.swing.JFrame {
         try {
             String line;
             br = new BufferedReader(new FileReader("data/questions.csv"));
- 
+            XuLiRandom xlrd = new XuLiRandom(4);
             // How to read file in java line by line?
             while ((line = br.readLine()) != null) {
                 List<String> questions = new ArrayList<String>();
@@ -51,7 +51,13 @@ public class ThiTracNghiem extends javax.swing.JFrame {
                 a.setCauHoi(questions.get(0));
                 a.setDapAn(questions.get(2));
                 String[] arrayCauTraLoi = questions.get(1).split("-");
-                a.setCauTraLoi(arrayCauTraLoi);
+                int[] vitricautraloi = new int[4];
+                xlrd.xuLy(vitricautraloi);
+                String[] newCauTraLoi = new String[4];
+                for (int xl = 0; xl < 4 ; xl++){
+                    newCauTraLoi[xl] = arrayCauTraLoi[vitricautraloi[xl]];
+                }
+                a.setCauTraLoi(newCauTraLoi);
                 a.setVitri(++i);
                 listTemp.add(a);  
                 if(i>n)
@@ -404,9 +410,10 @@ public class ThiTracNghiem extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jPanelMain, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 20, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         jPanelMain.getAccessibleContext().setAccessibleDescription("");
