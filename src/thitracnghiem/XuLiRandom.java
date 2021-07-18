@@ -17,8 +17,9 @@ public class XuLiRandom {
     public XuLiRandom(int n) {
         this.n = n;
     }
-    public void xuLy(int[] arr)
+    protected void xuLy(int[] arr)
     {
+        Random rd =new Random();
         int[] b= new int[arr.length];
         for(int i = 0 ; i<b.length;i++)
         {
@@ -32,12 +33,9 @@ public class XuLiRandom {
                 arr[n-1]=b[0];;
             }
             else{
-                Random rd =new Random();
-                int temp = rd.nextInt(j+1);
-            
-            arr[n-1-j]=b[temp];
-                
-            b[temp]=b[j];
+                int temp = rd.nextInt(j+1);            
+                arr[n-1-j]=b[temp];                
+                b[temp]=b[j];
             }      
             
         }

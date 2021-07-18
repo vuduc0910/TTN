@@ -9,40 +9,13 @@ package thitracnghiem;
  *
  * @author vuduc
  */
-public class CauHoi {
-    private String cauHoi;
-    private String[] cauTraLoi;
-    private String dapAn;
+public class CauHoi extends BoCauHoi {
     private String luaChon;
     private int vitri;
 
     public CauHoi() {
         vitri=0;
         luaChon = "";
-    }
-
-    public String getCauHoi() {
-        return cauHoi;
-    }
-
-    public void setCauHoi(String cauHoi) {
-        this.cauHoi = cauHoi;
-    }
-
-    public String[] getCauTraLoi() {
-        return cauTraLoi;
-    }
-
-    public void setCauTraLoi(String[] cauTraLoi) {
-        this.cauTraLoi = cauTraLoi;
-    }
-
-    public String getDapAn() {
-        return dapAn;
-    }
-
-    public void setDapAn(String dapAn) {
-        this.dapAn = dapAn;
     }
 
     public String getLuaChon() {
