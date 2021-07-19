@@ -19,10 +19,10 @@ import java.io.BufferedReader;
 public class StudentWriter {
     private static final String COMMA_DELIMITER = ",";
     private static final String NEW_LINE_SEPARATOR = "\n";
-    private static final String FILE_HEADER = "cauhoi,dsdapan,dapandung";
+    private static final String FILE_HEADER = "HoTen,MSSV,Diemso";
     public static void main(String[] args) {
  
-        String fileName = "data/questions.csv";
+        String fileName = "data/kq.csv";
         writeCsvFile(fileName);
     }
     public static void writeCsvFile(String fileName) {
@@ -35,7 +35,7 @@ public class StudentWriter {
         FileWriter fileWriter = null;
  
         try {
-            fileWriter = new FileWriter(fileName);
+            fileWriter = new FileWriter(fileName,true);
  
             // Write the CSV file header
             fileWriter.append(FILE_HEADER);
