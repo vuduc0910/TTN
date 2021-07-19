@@ -17,6 +17,7 @@ import java.util.logging.Logger;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
 
@@ -31,8 +32,11 @@ public class ThiTracNghiem extends javax.swing.JFrame {
      * Creates new form ThiTracNghiem
      */
     private static final String COMMA_DELIMITER = ","; 
+    private static final String NEW_LINE_SEPARATOR = "\n";
     private int viTriHienTai;
-    private int soCauHoi=3;
+    private int soCauHoi= 25;
+    private String username;
+    private String mssv;
     private ArrayList<CauHoi> list = new ArrayList<>();
     public void addCauHoiList(int n)
     {   
@@ -177,7 +181,18 @@ public class ThiTracNghiem extends javax.swing.JFrame {
         
         
     }
-
+     public ThiTracNghiem(String username, String mssv){
+        this.username = username;
+        this.mssv = mssv;
+        initComponents();
+//        jPanelTime.setVisible(false);
+        
+        jLabelCauHoi.setText("");
+        jLabelCauTraLoiA.setText("");
+        jLabelCauTraLoiB.setText("");
+        jLabelCauTraLoiC.setText("");
+        jLabelCauTraLoiD.setText("");
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -207,6 +222,7 @@ public class ThiTracNghiem extends javax.swing.JFrame {
         jButtonPre = new javax.swing.JButton();
         jButtonNext = new javax.swing.JButton();
         jButtonFinish = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setSize(new java.awt.Dimension(1650, 1080));
@@ -313,7 +329,9 @@ public class ThiTracNghiem extends javax.swing.JFrame {
                     .addGroup(jPanelMainLayout.createSequentialGroup()
                         .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanelMainLayout.createSequentialGroup()
-                                .addGap(80, 80, 80)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabelIDCauHoi, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanelMainLayout.createSequentialGroup()
                                 .addGap(479, 479, 479)
@@ -361,7 +379,9 @@ public class ThiTracNghiem extends javax.swing.JFrame {
                 .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanelMainLayout.createSequentialGroup()
                         .addGap(37, 37, 37)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4))
                         .addGap(18, 18, 18)
                         .addComponent(jPanelCauHoi, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanelMainLayout.createSequentialGroup()
@@ -459,7 +479,7 @@ public class ThiTracNghiem extends javax.swing.JFrame {
             ThreadTime threadTime = new ThreadTime();
             threadTime.start();
             buttonGroupDapan.clearSelection();
-            addCauHoiList(4);
+            addCauHoiList(30);
             addListFrame(list.get(0));
             addButtonIdDeThi(soCauHoi);
             jPanelCauHoi.setVisible(true);
@@ -478,6 +498,33 @@ public class ThiTracNghiem extends javax.swing.JFrame {
                 }
             }
             String tk = (diem +"")+"/"+(soCauHoi+"");
+            List<KQKT> listKq  = new ArrayList<>();
+            listKq.add(new KQKT(this.username, this.mssv, tk));
+            FileWriter fileWriter = null;
+            String fileNameWrite = "data/kq.csv";
+            try {
+               fileWriter = new FileWriter(fileNameWrite,true);  
+               for (KQKT kq : listKq) {
+                fileWriter.append(kq.getUsername());
+                fileWriter.append(COMMA_DELIMITER);
+                fileWriter.append(kq.getMssv());
+                fileWriter.append(COMMA_DELIMITER);
+                fileWriter.append("'" + kq.getScore());
+                fileWriter.append(NEW_LINE_SEPARATOR);
+            }
+            }
+            catch (Exception e) {
+                System.out.println("Error in CsvFileWriter !!!");
+                e.printStackTrace();
+            } finally {
+                try {
+                    fileWriter.flush();
+                    fileWriter.close();
+                } catch (IOException e) {
+                    System.out.println("Error while flushing/closing fileWriter !!!");
+                    e.printStackTrace();
+                }
+            }
             KQ kq = new KQ(tk);
             this.setVisible(false);
             kq.setVisible(true);
@@ -546,6 +593,7 @@ public class ThiTracNghiem extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabelCauHoi;
     private javax.swing.JLabel jLabelCauTraLoiA;
     private javax.swing.JLabel jLabelCauTraLoiB;

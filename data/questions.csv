@@ -1,4 +1,30 @@
-cauhoi1,dapan1-dapan2-dapan3-dapan4,dapan1
-cauhoi2,dapan1-dapan2-dapan3-dapan4,dapan2
-cauhoi3,dapan1-dapan2-dapan3-dapan4,dapan3
-cauhoi4,dapan1-dapan2-dapan3-dapan4,dapan4
+Phuong thuc next() cua lop Scanner dung de lam gi?,Nhap 1 so nguyen.-Nhap 1 ki tu-Nhap 1 chuoi-Khong co phuong thuc nay.,Nhap 1 chuoi
+Muon chay duoc chuong trinh java chung ta phai cai phan mem nao,NetBeans-Eclipse-JDK-Java Platform,Java Platform
+Phuong thuc nextLine() thuoc lop nao?,String-Scanner-Integer-System,Scanner
+Kieu du lieu nao trong java chua gia tri ca chu va so?,int-byte-char-String,String
+Dau khong phai la 1 thanh phan cau truc cua lop Java?,Ten lop-Thuoc tinh-Phuong thuc-Bien,Bien
+Doi tuong la gi?,Cac lop duoc tao the hien tu lop do-Mot the hien cua lop-Mot tham chieu den muc thuoc tinh-Mot bien,Mot the hien cua lop
+Dau la khai bao bien hop le?,theOne-the One-1the_One-$the One,theOne
+File chua ma nguon Java sau khi duoc bien dich co duoi la gi?,.java-.class-.jav-.exe,.class
+Java platform gom may thanh phan?,1-2-3-4,2
+Java chay tren he dieu hanh nao sau day?,Microsoft Windows-Linux-Sun Solaris OS- Tat ca deu dung,Tat ca deu dung
+Ngon ngu lap trinh Java cung cap cac chuc nang nao sau day?,Giao dien lap trinh ung dung-Bo cong cu giao dien nguoi dung-Thu vien tich hop-Tat ca deu dung,Tat ca deu dung
+Co bao nhieu cach viet chu thich trong Java,1-2-3-4,3
+Cach dat ten nao sau day la sai,2word-*word-main-Tat ca deu sai,Tat ca deu sai
+Mot chuong trinh gom 2 class se co bao nhieu cach main?,1-2-3-4,4
+Mot lop trong Java co the co bao nhieu lop cha?,1-2-3-4,1
+Mot lop trong Java co the co bao nhieu lop con?,2-3-4-Vo so,Vo so
+Co bao nhieu loai bien trong Java?,1-2-3-4,4
+Truong du lieu la cac bien dang nao sau day?,Bien thay mat va tham so-Bien thay mat va bien lop-Bien thay mat va bien cuc bo-Bien lop va tham so.,Bien thay mat va bien lop
+Cach dat ten nao sau day la sai?,final-dem-_final-$final,final
+Co bao nhieu kieu du lieu co so trong Java?,7-8-9-5,8
+Co bao nhieu kieu so nguyen trong Java?,1-2-3-4,4
+Lenh nao ngung vong lap hien thoi va bat dau vong lap tiep theo,continue-break-cease-end,continue
+De dao gia tri cua 1 bien boolean ta dung toan tu nao,!->>-<<->>>,!
+Dau khong phai la 1 kieu du lieu nguyen thuy trong Java?,double-int-long-long float,long float
+Goi nao trong Java chua lop Scanner dung de nhap du lieu tu ban phim?,java.net-java.io-java.util-java.awt,java.util
+Ten dau tien cua Java la gi?,Java-Oak-Café-James golings,Oak
+Dau la khai bao lop Cat?,Class Cat{}-class public Cat{}-class Cat{}-public Cat class{},class Cat{}
+Khai bao lop nao duoi day la dung,public class default{}-protected inner class engine{}-final class outer{}-Tat ca deu sai,final class outer{}
+De khai bao lop Xedap1 ke thua lop Xedap phai lam nhu the nao,class Xedap1 extend Xedap{}-public class Xedap1 extend Xedap{}-class Xedap1 extends Xedap{}-Tat ca deu sai ,class Xedap1 extends Xedap{}
+Bien du lieu la cac bien dang nao sau day?,Bien lop va Tham so-Bien cuc bo va Tham so-Bien cuc bo va bien lop-Tat ca deu sai,Bien cuc bo va Tham so
