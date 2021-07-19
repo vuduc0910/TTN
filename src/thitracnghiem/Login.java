@@ -36,7 +36,6 @@ public class Login extends javax.swing.JFrame {
             while ((line = br.readLine()) != null) {
                 List<String> account = new ArrayList<String>();
                 account = parseCsvLine(line);
-                System.out.println(account.get(0)+ username);
                 if(username.equals(account.get(0)) && password.equals(account.get(1))){
                     return true;
                 }
@@ -160,10 +159,9 @@ public class Login extends javax.swing.JFrame {
         
         String username = jTextFieldUserName.getText();
         String password = String.valueOf(jPasswordField.getPassword());
-        System.out.println(username + password);
         if(KiemTraSinhVien(username, password))
         {
-            ThiTracNghiem thiTracNghiem = new ThiTracNghiem();
+            ThiTracNghiem thiTracNghiem = new ThiTracNghiem(username,password);
             this.setVisible(false);
             thiTracNghiem.setVisible(true);
         }
